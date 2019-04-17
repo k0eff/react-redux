@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { updateUser } from "./actions/userActions";
 
@@ -11,13 +12,11 @@ class App extends Component {
     this.onUpdateUser = this.onUpdateUser.bind(this);
   }
 
-  onUpdateUser() {
-    this.props.onUpdateUser("Sammy");
+  onUpdateUser(e) {
+    this.props.onUpdateUser(e.target.value);
   }
 
   render() {
-    console.log(this.props);
-
     return (
       <div className="App">
         <header className="App-header">
@@ -33,7 +32,7 @@ class App extends Component {
           >
             Learn React
           </a>
-          <div onClick={this.onUpdateUser}>Update user</div>
+          <input onChange={this.onUpdateUser} />
           {this.props.user}
         </header>
       </div>
@@ -49,10 +48,16 @@ const mapStateToProps = (state, props) => {
   };
 }; // auto return the object
 
-const mapActionsToProps = {
-  onUpdateUser: updateUser
-};
+const mapActionsToProps = (dispatch, props) => {
+  console.log(props);
 
+  return bindActionCreators(
+    {
+      onUpdateUser: updateUser
+    },
+    dispatch
+  );
+};
 export default connect(
   mapStateToProps,
   mapActionsToProps
