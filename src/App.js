@@ -41,10 +41,13 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  products: state.products,
-  user: state.user
-}); // auto return the object
+const mapStateToProps = (state, props) => {
+  return {
+    products: state.products,
+    user: state.user,
+    userPlusProp: `${state.user} ${props.aRandomProp}`
+  };
+}; // auto return the object
 
 const mapActionsToProps = {
   onUpdateUser: updateUser
