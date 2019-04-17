@@ -7,20 +7,8 @@ import * as serviceWorker from "./serviceWorker";
 import { createStore, combineReducers } from "redux";
 
 import { Provider } from "react-redux";
-
-function productsReducer(state = [], action) {
-  return state;
-}
-
-function userReducer(state = "", { type, payload }) {
-  switch (type) {
-    case "updateUser":
-      return payload.user;
-    default:
-      return state;
-  }
-  return state;
-}
+import productsReducer from "./reducers/productsReducer";
+import userReducer from "./reducers/userReducer";
 
 const allReducers = combineReducers({
   products: productsReducer,
@@ -33,7 +21,8 @@ const store = createStore(
     products: [{ name: "iPhone" }],
     user: "Michael"
   },
-  window.devToolsExtension && window.devToolsExtension()
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 //
