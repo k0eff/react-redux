@@ -3,8 +3,18 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import { connect } from "react-redux";
+import { updateUser } from "./actions/userActions";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.onUpdateUser = this.onUpdateUser.bind(this);
+  }
+
+  onUpdateUser() {
+    this.props.onUpdateUser("Sammy");
+  }
+
   render() {
     console.log(this.props);
 
@@ -23,14 +33,24 @@ class App extends Component {
           >
             Learn React
           </a>
+          <div onClick={this.onUpdateUser}>Update user</div>
+          {this.props.user}
         </header>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return state;
+const mapStateToProps = state => ({
+  products: state.products,
+  user: state.user
+}); // auto return the object
+
+const mapActionsToProps = {
+  onUpdateUser: updateUser
 };
 
-export default connect(mapStateToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(App);
