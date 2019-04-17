@@ -14,6 +14,13 @@ const store = createStore(reducer);
 
 console.log(store.getState());
 
+const action = {
+  type: "changeState",
+  payload: {
+    newstate: "New state 234"
+  }
+};
+
 ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
