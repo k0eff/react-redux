@@ -4,27 +4,22 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
-function reducer(state, action) {
-  if (action.type === "changeState") {
-    return action.payload.newState;
-  }
-  return "State123";
+function productsReducer(state = [], action) {
+  return state;
 }
 
-const store = createStore(reducer);
+function userReducer(state = "", action) {
+  return state;
+}
 
-console.log(store.getState());
+const allReducers = combineReducers({
+  products: productsReducer,
+  user: userReducer
+});
 
-const action = {
-  type: "changeState",
-  payload: {
-    newState: "New state 234"
-  }
-};
-
-store.dispatch(action);
+const store = createStore(allReducers);
 
 console.log(store.getState());
 
