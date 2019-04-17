@@ -6,7 +6,10 @@ import * as serviceWorker from "./serviceWorker";
 
 import { createStore } from "redux";
 
-function reducer() {
+function reducer(state, action) {
+  if (action.type === "changeState") {
+    return action.payload.newState;
+  }
   return "State123";
 }
 
@@ -17,11 +20,17 @@ console.log(store.getState());
 const action = {
   type: "changeState",
   payload: {
-    newstate: "New state 234"
+    newState: "New state 234"
   }
 };
 
 store.dispatch(action);
+
+console.log(store.getState());
+
+//
+
+//
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
